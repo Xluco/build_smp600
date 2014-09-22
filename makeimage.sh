@@ -27,13 +27,13 @@ MakeKernel() {
 
 MakeRamdisk() {
     echo "=> Packing the ramdisk"
-    ./mkbootfs ../ramdisk_smp600 | gzip -9 > ramdisk.gz
+    ./mkbootfs ../ramdisk_smp600 | xz -6 -Ccrc32 > ramdisk.xz
 }
 
 MakeBootImg() {
     echo "=> Making boot.img"
     cp ../kernel_smp600/arch/arm/boot/zImage .
-    ./mkbootimg --kernel zImage --ramdisk ramdisk.gz -o boot.img
+    ./mkbootimg --kernel zImage --ramdisk ramdisk.xz -o boot.img
 }
 
 MakeZip() {
@@ -47,7 +47,7 @@ MakeZip() {
 
 FinalCleanup() {
     if [ -e zip/boot.img ]; then rm -f zip/boot.img; echo " >>>Removing old boot.img"; fi;
-    if [ -e ramdisk.gz ]; then rm -f ramdisk.gz; echo " >>>Removing old ramdisk"; fi;
+    if [ -e ramdisk.xz ]; then rm -f ramdisk.xz; echo " >>>Removing old ramdisk"; fi;
     if [ -e zImage ]; then rm -f zImage; echo " >>>Removing old zImage"; fi;
 }
 # functions end
