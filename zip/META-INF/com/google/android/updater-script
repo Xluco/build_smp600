@@ -16,6 +16,7 @@ set_perm_recursive(0, 0, 0777, 0777, "/system/etc/init.d");
 set_perm_recursive(0, 0, 0777, 0777, "/system/lib/modules");
 set_perm(0, 0, 0777, "/sbin/xboot.sh");
 set_perm(0, 0, 0777, "/sbin/busybox");
+set_perm(0, 0, 0755, "/system/xbin/ntfs-3g");
 set_progress(0.6);
 ui_print(" ");
 ui_print("  --> Neutralising Knox");
